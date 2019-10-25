@@ -9,10 +9,10 @@ class App extends Component {
 		name: '',
 		value: 0,
 		counters: [
-			{ id: 1, name: 'LG', value: 0, date:12.22 },
-			{ id: 2, name: 'SAMSUNG', value: 0, date:12.22 },
-			{ id: 3, name: 'Apple', value: 0, date:12.22 },
-			{ id: 4, name: 'Nokia', value: 4, date:12.22 }
+			{ id: 1, name: 'LG', value: 0, date: 12.22 },
+			{ id: 2, name: 'SAMSUNG', value: 0, date: 12.22 },
+			{ id: 3, name: 'Apple', value: 0, date: 12.22 },
+			{ id: 4, name: 'Nokia', value: 4, date: 12.22 }
 		],
 		initialCounters: []
 	};
@@ -23,21 +23,21 @@ class App extends Component {
 	// }
 	componentDidMount() {
 		this.setCounters();
-		console.log(this.state)
+		console.log(this.state);
 	}
 
 	setCounters = () => {
 		this.setState({ initialCounters: this.state.counters });
 	};
 
-	filterCounters =(e) => {
+	filterCounters = (e) => {
 		let updatedCounters = this.state.initialCounters;
 		updatedCounters = updatedCounters.filter((item) => {
 			return item.name.toLowerCase().search(e.target.value.toLowerCase()) !== -1;
 		});
 
 		this.setState({ counters: updatedCounters });
-	}
+	};
 
 	onChangeName = (e) => {
 		let name = e.target.value === '' ? 0 : e.target.value;
@@ -103,37 +103,49 @@ class App extends Component {
 
 	handleDelete = (counterId) => {
 		const counters = this.state.counters.filter((c) => c.id !== counterId);
-		this.setState({ counters: counters});
+		this.setState({ counters: counters });
 	};
 
-	sortMaxMin = () =>{
-		let counters = this.state.counters.sort((a,b)=> a.value - b.value);
-		this.setState({counters: counters})
-		console.log(counters)
-	}
+	sortMaxMin = (arr) => {
+		let counters = arr.sort((a, b) => a.value - b.value);
+		this.setState({ counters: counters });
+	};
+
+	sortMinMax = (arr) => {
+		let counters = arr.sort((a, b) => b.value - a.value);
+		this.setState({ counters: counters });
+	};
+
+	changeFunc = (e) => {
+		const { counters } = this.state;
+		return e.target.value === '1' ? this.sortMinMax(counters) : this.sortMaxMin(counters);
+	};
 
 	render() {
 		console.log(this.state.counters);
 		return (
 			<React.Fragment>
-				<NavBar 
-					totalCounters={this.state.counters.filter((c) => c.value > 0).length} 
-					sum={this.state.counters.reduce((acc,el)=> acc + el.value,0)
-				}
+				<NavBar
+					totalCounters={this.state.counters.filter((c) => c.value > 0).length}
+					sum={this.state.counters.reduce((acc, el) => acc + el.value, 0)}
 				/>
 				<main className="container">
 					<form ref={(el) => (this.myFormRef = el)}>
-						<input onChange={(e) => this.onChangeName(e)} placeholder='Name'/>
-						<input onChange={(e) => this.onChangeValue(e)} placeholder='Value'/>
+						<input onChange={(e) => this.onChangeName(e)} placeholder="Name" />
+						<input onChange={(e) => this.onChangeValue(e)} placeholder="Value" />
 					</form>
 					<input placeholder="Search..." onChange={this.filterCounters} />
 					<button onClick={() => this.addItem()} className="btn btn-primary btn-sm">
 						Add item
 					</button>
-					<select >
-						<option >Sort</option>
-						<option onChange={(event) => console.log(event)}>Max - Min</option>
-						<option>Min - Max</option>
+					<button onClick={() => this.sortMaxMin()} className="btn btn-primary btn-sm">
+						min max
+					</button>
+
+					<select onChange={(e) => this.changeFunc(e)}>
+						<option />
+						<option value="1">Max - Min</option>
+						<option value="2">Min - Max</option>
 					</select>
 					<Counters
 						counters={this.state.counters}
