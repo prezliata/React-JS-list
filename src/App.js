@@ -9,17 +9,36 @@ class App extends Component {
 		name: '',
 		value: 0,
 		counters: [
-			{ id: 1, name: 'One', value: 0 },
-			{ id: 2, name: 'One', value: 0 },
-			{ id: 3, name: 'One', value: 0 },
-			{ id: 4, name: 'One', value: 4 }
-		]
+			{ id: 1, name: 'LG', value: 0, date:12.22 },
+			{ id: 2, name: 'SAMSUNG', value: 0, date:12.22 },
+			{ id: 3, name: 'Apple', value: 0, date:12.22 },
+			{ id: 4, name: 'Nokia', value: 4, date:12.22 }
+		],
+		initialCounters: []
 	};
 
 	// componentDidMount() {
 	// 	this.addItem();
 	// 	console.log(this.state);
 	// }
+	componentDidMount() {
+		this.setCounters();
+		console.log(this.state)
+	}
+
+	setCounters = () => {
+		this.setState({ initialCounters: this.state.counters });
+	};
+
+	filterCounters =(e) => {
+		let updatedCounters = this.state.initialCounters;
+		updatedCounters = updatedCounters.filter((item) => {
+			return item.name.toLowerCase().search(e.target.value.toLowerCase()) !== -1;
+		});
+
+		this.setState({ counters: updatedCounters });
+	}
+
 	onChangeName = (e) => {
 		let name = e.target.value === '' ? 0 : e.target.value;
 		this.setState({
@@ -35,10 +54,12 @@ class App extends Component {
 	};
 
 	addItem = () => {
+		let addDate = new Date().toLocaleString();
 		let newItem = {
-			id: this.state.counters.length + 1,
+			id: Date.now(),
 			name: this.state.name,
-			value: this.state.value
+			value: this.state.value,
+			date: addDate
 		};
 		let newCountersArr = this.state.counters;
 		newCountersArr.push(newItem);
@@ -82,22 +103,38 @@ class App extends Component {
 
 	handleDelete = (counterId) => {
 		const counters = this.state.counters.filter((c) => c.id !== counterId);
-		this.setState({ counters });
+		this.setState({ counters: counters});
 	};
+
+	sortMaxMin = () =>{
+		let counters = this.state.counters.sort((a,b)=> a.value - b.value);
+		this.setState({counters: counters})
+		console.log(counters)
+	}
 
 	render() {
 		console.log(this.state.counters);
 		return (
 			<React.Fragment>
-				<NavBar totalCounters={this.state.counters.filter((c) => c.value > 0).length} />
+				<NavBar 
+					totalCounters={this.state.counters.filter((c) => c.value > 0).length} 
+					sum={this.state.counters.reduce((acc,el)=> acc + el.value,0)
+				}
+				/>
 				<main className="container">
 					<form ref={(el) => (this.myFormRef = el)}>
-						<input onChange={(e) => this.onChangeName(e)} />
-						<input onChange={(e) => this.onChangeValue(e)} />
+						<input onChange={(e) => this.onChangeName(e)} placeholder='Name'/>
+						<input onChange={(e) => this.onChangeValue(e)} placeholder='Value'/>
 					</form>
+					<input placeholder="Search..." onChange={this.filterCounters} />
 					<button onClick={() => this.addItem()} className="btn btn-primary btn-sm">
 						Add item
 					</button>
+					<select >
+						<option >Sort</option>
+						<option onChange={(event) => console.log(event)}>Max - Min</option>
+						<option>Min - Max</option>
+					</select>
 					<Counters
 						counters={this.state.counters}
 						onReset={this.handleReset}

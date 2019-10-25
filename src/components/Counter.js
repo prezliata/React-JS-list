@@ -29,7 +29,7 @@ class Counter extends Component {
 
         return (
             <div> 
-                <h4>Count {this.props.id}</h4>
+                <h4>{this.props.counter.name + ":"} {this.props.counter.date} {this.props.id}</h4>
                 {/* {this.props.children} */}
                 {/* <img src={this.state.imageUrl} alt="" /> */}
                 <span className={classes}>{this.formatCount()}</span>
