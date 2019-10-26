@@ -6,6 +6,8 @@ import './App.css';
 
 class App extends Component {
 	state = {
+		isEditMode: false,
+		updateName: '',
 		name: '',
 		value: 0,
 		counters: [
@@ -121,10 +123,35 @@ class App extends Component {
 		return e.target.value === '1' ? this.sortMinMax(counters) : this.sortMaxMin(counters);
 	};
 
+	isEditModeTrue = () => {
+		this.setState({ isEditMode: true });
+	};
+
+	isEditModeFalse = () => {
+		this.setState({ isEditMode: false });
+	};
+
+	changeStyle = () => {
+		const { isEditMode } = this.state;
+		return isEditMode === true ? this.isEditModeFalse() : this.isEditModeTrue();
+	};
+
 	render() {
 		console.log(this.state.counters);
+		console.log(this.state.changeButton);
+
 		return (
 			<React.Fragment>
+				{this.state.isEditMode ? (
+					<button onClick={() => this.isEditModeFalse()} className="btn btn-primary btn-sm">
+						False
+					</button>
+				) : (
+					<button onClick={() => this.isEditModeTrue()} className="btn btn-primary btn-sm">
+						True
+					</button>
+				)}
+
 				<NavBar
 					totalCounters={this.state.counters.filter((c) => c.value > 0).length}
 					sum={this.state.counters.reduce((acc, el) => acc + el.value, 0)}
@@ -138,9 +165,6 @@ class App extends Component {
 					<button onClick={() => this.addItem()} className="btn btn-primary btn-sm">
 						Add item
 					</button>
-					<button onClick={() => this.sortMaxMin()} className="btn btn-primary btn-sm">
-						min max
-					</button>
 
 					<select onChange={(e) => this.changeFunc(e)}>
 						<option />
@@ -153,6 +177,7 @@ class App extends Component {
 						onIncrement={this.handleIncrement}
 						onDecrement={this.handleDecrement}
 						onDelete={this.handleDelete}
+						// onUpdateName={this.handleUpdateName}
 					/>
 				</main>
 			</React.Fragment>
