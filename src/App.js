@@ -6,6 +6,7 @@ import './App.css';
 
 class App extends Component {
 	state = {
+		editName: '',
 		isEditMode: false,
 		updateName: '',
 		name: '',
@@ -19,10 +20,6 @@ class App extends Component {
 		initialCounters: []
 	};
 
-	// componentDidMount() {
-	// 	this.addItem();
-	// 	console.log(this.state);
-	// }
 	componentDidMount() {
 		this.setCounters();
 		console.log(this.state);
@@ -55,9 +52,17 @@ class App extends Component {
 		});
 	};
 
+	handleEdit = (e) => {
+		let name = e.target.value;
+		this.setState({
+			editName: name
+		});
+	};
+
 	addItem = () => {
 		let addDate = new Date().toLocaleString();
 		let newItem = {
+			isEditMode: false,
 			id: Date.now(),
 			name: this.state.name,
 			value: this.state.value,
@@ -126,10 +131,12 @@ class App extends Component {
 
 	isEditModeTrue = (e) => {
 		let arr = this.state.counters;
+		let editName = this.state.editName;
 		let id = e.target.getAttribute('data-id');
 		for (let i = 0; i < arr.length; i++) {
 			if (arr[i].id == id) {
 				arr[i].isEditMode = false;
+				arr[i].name = editName;
 			}
 		}
 		this.setState({ counters: arr });
@@ -146,24 +153,9 @@ class App extends Component {
 		this.setState({ counters: arr });
 	};
 
-	handleEdit = () => {
-		const { isEditMode } = this.state;
-		return isEditMode === true ? this.isEditModeFalse() : this.isEditModeTrue();
-	};
-
 	render() {
 		return (
 			<React.Fragment>
-				{this.state.isEditMode ? (
-					<button onClick={() => this.isEditModeFalse()} className="btn btn-primary btn-sm">
-						False
-					</button>
-				) : (
-					<button onClick={() => this.isEditModeTrue()} className="btn btn-primary btn-sm">
-						True
-					</button>
-				)}
-
 				<NavBar
 					totalCounters={this.state.counters.filter((c) => c.value > 0).length}
 					sum={this.state.counters.reduce((acc, el) => acc + el.value, 0)}
@@ -189,10 +181,10 @@ class App extends Component {
 						onIncrement={this.handleIncrement}
 						onDecrement={this.handleDecrement}
 						onDelete={this.handleDelete}
-						onEdit={this.handleEdit}
 						onIsEditModeFalse={this.isEditModeFalse}
 						onIsEditModeTrue={this.isEditModeTrue}
 						onIsEditMode={this.state.counters.isEditMode}
+						onHandleEdit={this.handleEdit}
 					/>
 				</main>
 			</React.Fragment>

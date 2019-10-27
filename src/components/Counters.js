@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 import Counter from './Counter';
 
 class Counters extends Component {
-	componentDidUpdate(prevProps, prevState) {
-		// console.log('prevProps', prevProps);
-		// console.log('prevState', prevState);
-	}
-
 	render() {
 		const {
 			onReset,
@@ -15,10 +10,10 @@ class Counters extends Component {
 			onIncrement,
 			onDecrement,
 			onUpdateName,
-			onEdit,
 			onIsEditModeTrue,
 			onIsEditModeFalse,
-			onIsEditMode
+			onIsEditMode,
+			onHandleEdit
 		} = this.props;
 
 		return (
@@ -35,10 +30,10 @@ class Counters extends Component {
 						counter={counter}
 						onDecrement={onDecrement}
 						onUpdateName={onUpdateName}
-						onEdit={onEdit}
 						onIsEditModeTrue={onIsEditModeTrue}
 						onIsEditModeFalse={onIsEditModeFalse}
 						onIsEditMode={onIsEditMode}
+						onHandleEdit={onHandleEdit}
 					/>
 				))}
 			</div>

@@ -51,13 +51,16 @@ class Counter extends Component {
 						Edit
 					</button>
 				) : (
-					<button
-						onClick={(e) => this.props.onIsEditModeTrue(e)}
-						data-id={this.props.counter.id}
-						className="btn btn-danger btn-sm"
-					>
-						Save
-					</button>
+					<div>
+						<button
+							onClick={(e) => this.props.onIsEditModeTrue(e)}
+							data-id={this.props.counter.id}
+							className="btn btn-danger btn-sm"
+						>
+							Save
+						</button>
+						<input placeholder="edit" onChange={(e) => this.props.onHandleEdit(e)} />
+					</div>
 				)}
 			</div>
 		);
