@@ -7,7 +7,6 @@ class Counter extends Component {
 	}
 
 	handleIncrement = (product) => {
-		console.log(product);
 		this.setState({ value: this.state.value + 1 });
 	};
 
@@ -23,28 +22,43 @@ class Counter extends Component {
 	render() {
 		let classes = 'badge m-2 badge-';
 		classes += this.props.counter.value === 0 ? 'warning' : 'primary';
-
 		return (
 			<div>
 				<h4>
 					{this.props.counter.name + ':'} {this.props.counter.date} {this.props.id}
 				</h4>
-				{/* {this.props.children} */}
-				{/* <img src={this.state.imageUrl} alt="" /> */}
 				<span className={classes}>{this.formatCount()}</span>
-				<button onClick={() => this.props.onIncrement(this.props.counter)} className="btn btn-primary btn-sm">
+				<button
+					onClick={(e) => this.props.onIncrement(this.props.counter, e)}
+					data-id={this.props.counter.id}
+					className="btn btn-primary btn-sm"
+				>
 					Increment
 				</button>
 				<button onClick={() => this.props.onDecrement(this.props.counter)} className="btn btn-secondary btn-sm">
 					Decrement
 				</button>
-				{/* <button onClick={(e) => this.props.onUpdateName(e)} type="button" className="btn btn-warning">
-					Update
-				</button> */}
 				<button onClick={() => this.props.onDelete(this.props.counter.id)} className="btn btn-danger btn-sm">
 					Delete
 				</button>
-				{/* {this.renderTags()} */}
+
+				{this.props.editMode === false ? (
+					<button
+						onClick={(e) => this.props.onIsEditModeFalse(e)}
+						data-id={this.props.counter.id}
+						className="btn btn-danger btn-sm"
+					>
+						Edit
+					</button>
+				) : (
+					<button
+						onClick={(e) => this.props.onIsEditModeTrue(e)}
+						data-id={this.props.counter.id}
+						className="btn btn-danger btn-sm"
+					>
+						Save
+					</button>
+				)}
 			</div>
 		);
 	}

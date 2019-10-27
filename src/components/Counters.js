@@ -8,7 +8,18 @@ class Counters extends Component {
 	}
 
 	render() {
-		const { onReset, counters, onDelete, onIncrement, onDecrement, onUpdateName } = this.props;
+		const {
+			onReset,
+			counters,
+			onDelete,
+			onIncrement,
+			onDecrement,
+			onUpdateName,
+			onEdit,
+			onIsEditModeTrue,
+			onIsEditModeFalse,
+			onIsEditMode
+		} = this.props;
 
 		return (
 			<div>
@@ -18,11 +29,16 @@ class Counters extends Component {
 				{counters.map((counter) => (
 					<Counter
 						key={counter.id}
+						editMode={counter.isEditMode}
 						onDelete={onDelete}
 						onIncrement={onIncrement}
 						counter={counter}
 						onDecrement={onDecrement}
 						onUpdateName={onUpdateName}
+						onEdit={onEdit}
+						onIsEditModeTrue={onIsEditModeTrue}
+						onIsEditModeFalse={onIsEditModeFalse}
+						onIsEditMode={onIsEditMode}
 					/>
 				))}
 			</div>

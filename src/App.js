@@ -11,10 +11,10 @@ class App extends Component {
 		name: '',
 		value: 0,
 		counters: [
-			{ id: 1, name: 'LG', value: 0, date: 12.22 },
-			{ id: 2, name: 'SAMSUNG', value: 0, date: 12.22 },
-			{ id: 3, name: 'Apple', value: 0, date: 12.22 },
-			{ id: 4, name: 'Nokia', value: 4, date: 12.22 }
+			{ id: 1, name: 'LG', isEditMode: false, value: 0, date: 12.22 },
+			{ id: 21212, name: 'SAMSUNG', isEditMode: false, value: 0, date: 12.22 },
+			{ id: 3, name: 'Apple', isEditMode: false, value: 0, date: 12.22 },
+			{ id: 4, name: 'Nokia', isEditMode: false, value: 4, date: 12.22 }
 		],
 		initialCounters: []
 	};
@@ -88,9 +88,10 @@ class App extends Component {
 		this.setState({ counters });
 	};
 
-	handleIncrement = (counter) => {
+	handleIncrement = (counter, e) => {
 		const counters = [ ...this.state.counters ];
 		const index = counters.indexOf(counter);
+		// console.log(e.target.getAttribute('data-id'));
 		counters[index] = { ...counter };
 		counters[index].value++;
 		this.setState({ counters });
@@ -123,23 +124,34 @@ class App extends Component {
 		return e.target.value === '1' ? this.sortMinMax(counters) : this.sortMaxMin(counters);
 	};
 
-	isEditModeTrue = () => {
-		this.setState({ isEditMode: true });
+	isEditModeTrue = (e) => {
+		let arr = this.state.counters;
+		let id = e.target.getAttribute('data-id');
+		for (let i = 0; i < arr.length; i++) {
+			if (arr[i].id == id) {
+				arr[i].isEditMode = false;
+			}
+		}
+		this.setState({ counters: arr });
 	};
 
-	isEditModeFalse = () => {
-		this.setState({ isEditMode: false });
+	isEditModeFalse = (e) => {
+		let arr = this.state.counters;
+		let id = e.target.getAttribute('data-id');
+		for (let i = 0; i < arr.length; i++) {
+			if (arr[i].id == id) {
+				arr[i].isEditMode = true;
+			}
+		}
+		this.setState({ counters: arr });
 	};
 
-	changeStyle = () => {
+	handleEdit = () => {
 		const { isEditMode } = this.state;
 		return isEditMode === true ? this.isEditModeFalse() : this.isEditModeTrue();
 	};
 
 	render() {
-		console.log(this.state.counters);
-		console.log(this.state.changeButton);
-
 		return (
 			<React.Fragment>
 				{this.state.isEditMode ? (
@@ -177,7 +189,10 @@ class App extends Component {
 						onIncrement={this.handleIncrement}
 						onDecrement={this.handleDecrement}
 						onDelete={this.handleDelete}
-						// onUpdateName={this.handleUpdateName}
+						onEdit={this.handleEdit}
+						onIsEditModeFalse={this.isEditModeFalse}
+						onIsEditModeTrue={this.isEditModeTrue}
+						onIsEditMode={this.state.counters.isEditMode}
 					/>
 				</main>
 			</React.Fragment>
