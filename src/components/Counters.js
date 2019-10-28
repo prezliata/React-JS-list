@@ -13,7 +13,10 @@ class Counters extends Component {
 			onIsEditModeTrue,
 			onIsEditModeFalse,
 			onIsEditMode,
-			onHandleEdit
+            onHandleEdit,
+            onChecked,
+            onDeleteAll,
+            onHandleInputChange
 		} = this.props;
 
 		return (
@@ -21,8 +24,12 @@ class Counters extends Component {
 				<button onClick={onReset} className="btn btn-primary btn-sm m-2">
 					Reset
 				</button>
+                <button onClick={onDeleteAll} className="btn btn-danger btn-sm m-2">
+					Delete select
+				</button>
 				{counters.map((counter) => (
 					<Counter
+                        isCheckedMode={counter.isChecked}
 						key={counter.id}
 						editMode={counter.isEditMode}
 						onDelete={onDelete}
@@ -33,7 +40,9 @@ class Counters extends Component {
 						onIsEditModeTrue={onIsEditModeTrue}
 						onIsEditModeFalse={onIsEditModeFalse}
 						onIsEditMode={onIsEditMode}
-						onHandleEdit={onHandleEdit}
+                        onHandleEdit={onHandleEdit}
+                        onChecked={onChecked}
+                        onHandleInputChange={onHandleInputChange}
 					/>
 				))}
 			</div>

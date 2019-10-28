@@ -24,6 +24,13 @@ class Counter extends Component {
 		classes += this.props.counter.value === 0 ? 'warning' : 'primary';
 		return (
 			<div>
+                <input
+                    name="isGoing"
+                    type="checkbox"
+                    defaultChecked={this.props.counter.isChecked}
+                    onChange={this.props.onHandleInputChange} 
+                    data-id={this.props.counter.id}
+                />
 				<h4>
 					{this.props.counter.name + ':'} {this.props.counter.date} {this.props.id}
 				</h4>

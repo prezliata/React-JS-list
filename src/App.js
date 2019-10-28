@@ -6,16 +6,17 @@ import './App.css';
 
 class App extends Component {
 	state = {
+		isChecked: false,
 		editName: '',
 		isEditMode: false,
 		updateName: '',
 		name: '',
 		value: 0,
 		counters: [
-			{ id: 1, name: 'LG', isEditMode: false, value: 0, date: 12.22 },
-			{ id: 21212, name: 'SAMSUNG', isEditMode: false, value: 0, date: 12.22 },
-			{ id: 3, name: 'Apple', isEditMode: false, value: 0, date: 12.22 },
-			{ id: 4, name: 'Nokia', isEditMode: false, value: 4, date: 12.22 }
+			{ id: 1, name: 'LG', isEditMode: false, value: 0, date: 12.22, isChecked: false },
+			{ id: 21212, name: 'SAMSUNG', isEditMode: false, value: 0, date: 12.22, isChecked: false },
+			{ id: 3, name: 'Apple', isEditMode: false, value: 0, date: 12.22, isChecked: false },
+			{ id: 4, name: 'Nokia', isEditMode: false, value: 4, date: 12.22, isChecked: true }
 		],
 		initialCounters: []
 	};
@@ -62,6 +63,7 @@ class App extends Component {
 	addItem = () => {
 		let addDate = new Date().toLocaleString();
 		let newItem = {
+			isChecked: false,
 			isEditMode: false,
 			id: Date.now(),
 			name: this.state.name,
@@ -113,6 +115,21 @@ class App extends Component {
 		const counters = this.state.counters.filter((c) => c.id !== counterId);
 		this.setState({ counters: counters });
 	};
+	handleDeleteAll=()=>{
+		const counters = this.state.counters.filter((c) => c.isChecked !== true);
+		this.setState({ counters: counters });
+	}
+
+	handleInputChange = (e) =>{
+		let arr = this.state.counters;
+		let id = e.target.getAttribute('data-id');
+		for (let i = 0; i < arr.length; i++) {
+			if (arr[i].id == id) {
+				arr[i].isChecked = !arr[i].isChecked;
+			}
+		}
+		this.setState({ counters: arr });
+	}
 
 	sortMaxMin = (arr) => {
 		let counters = arr.sort((a, b) => a.value - b.value);
@@ -176,6 +193,7 @@ class App extends Component {
 						<option value="2">Min - Max</option>
 					</select>
 					<Counters
+						onChecked={this.state.isChecked}
 						counters={this.state.counters}
 						onReset={this.handleReset}
 						onIncrement={this.handleIncrement}
@@ -185,6 +203,8 @@ class App extends Component {
 						onIsEditModeTrue={this.isEditModeTrue}
 						onIsEditMode={this.state.counters.isEditMode}
 						onHandleEdit={this.handleEdit}
+						onDeleteAll={this.handleDeleteAll}
+						onHandleInputChange={this.handleInputChange}
 					/>
 				</main>
 			</React.Fragment>
