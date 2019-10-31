@@ -5,11 +5,13 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
 
-import reducer from './store/reducer';
-import {createStore} from 'redux';
+// import reducer from './reducers/reducer';
+import {createStore } from 'redux';
 import {Provider} from 'react-redux';
 
-const store = createStore(reducer);
+import allReducer from './reducers';
+
+const store = createStore(allReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 
