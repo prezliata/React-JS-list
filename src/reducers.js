@@ -2,6 +2,7 @@ import counterReducer from './components/Body/reducer';
 import loggedReducer from './reducers/isLogged'
 import {combineReducers} from 'redux';
 
+
 const allReducers = combineReducers({
     counter: counterReducer,
     isLogged: loggedReducer,

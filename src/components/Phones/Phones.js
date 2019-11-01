@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import {connect} from 'react-redux';
 
 class Phones extends Component {
 	constructor() {
 		super();
 		this.state = {
-            loading: true,
+            isLoaded: true,
 			arrOfPhones: []
 		};
 	}
@@ -16,28 +17,33 @@ class Phones extends Component {
 
 	getPhones = () => {
 		axios
-			.get('https://dog.ceo/api/breeds/image/random')
+			.get('http://www.mocky.io/v2/5dbc31173100008bf04c0ef5')
 			.then((res) => {
 				this.setState({
-					arrOfPhones: res.data,
+					arrOfPhones: res.data.results,
 					loading: false
 				});
 			})
 			.catch((err) => {
 				console.log(err);
-			});
+            });
+            
 	};
 
-
 	render() {
-		console.log(this.state);
-		
+        console.log(this.state.arrOfPhones);
+        const phones = this.state.arrOfPhones.map((item, i) =>(
+            <div key={i}>
+                Name: {item.name}
+            </div>
+        ));
+
 		return (
 			<div>
-                'hello'
+                {phones}
 			</div>
-		);
+        );
 	}
 }
 
-export default Phones;
+export default  (Phones);
