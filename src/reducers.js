@@ -1,5 +1,5 @@
-import counterReducer from './counter';
-import loggedReducer from './isLogged'
+import counterReducer from './components/Body/reducer';
+import loggedReducer from './reducers/isLogged'
 import {combineReducers} from 'redux';
 
 const allReducers = combineReducers({
