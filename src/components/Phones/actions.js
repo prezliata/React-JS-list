@@ -2,8 +2,8 @@ import axios from 'axios';
 
 export const loadPhones = () => {
 	return (dispatch) => {
-		axios.get('http://www.mocky.io/v2/5dbc31173100008bf04c0ef5').then((res) => {
-			dispatch(getPhones(res.data.results));
+		axios.get('http://demo5642441.mockable.io/tewgsesxerf').then((res) => {
+			dispatch(getPhones(res.data));
 		});
 	};
 };
@@ -14,4 +14,3 @@ export const getPhones = (phones) => {
 		payload: phones
 	};
 };
-
