@@ -2,7 +2,7 @@ import counterReducer from './components/Body/reducer';
 import loggedReducer from './reducers/isLogged';
 import { combineReducers } from 'redux';
 
-import mainReducer from './components/Phones/reduser';
+import mainReducer from './components/Phones/reducer';
 
 const allReducers = combineReducers({
 	counter: counterReducer,

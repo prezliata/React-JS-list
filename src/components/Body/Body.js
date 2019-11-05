@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { increment, decrement } from '../Body/actions/changeNumber';
+import { increment, decrement } from '../Body/actions';
 
 const mapStateToProps = (state) =>{
 	return {
