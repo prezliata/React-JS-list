@@ -48,7 +48,7 @@ class Addphone extends Component {
 	handleSubmit = () => {
 		const phone = this.state.phone;
 		axios
-			.post(`https://demo5642441.mockable.io/tewgsesxerf`, phone)
+			.post(`https://5dc2cce41666f6001477f524.mockapi.io/reactapi/phone/`, phone)
 			.then((res) => {
 				console.log(res);
 			})

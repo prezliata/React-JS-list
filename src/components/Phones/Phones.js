@@ -20,9 +20,9 @@ class Phones extends Component {
 		return (
 			<div>
 				<h1>Phones</h1>
-				<div>
+				<div  className="wrapper">
 					{this.props.phonesArr.map((item, idx)=> {
-						return <div key={idx} className="wrapper">
+						return <div key={idx}>
 							<div className="container phones">
 								<input type="checkbox" defaultChecked={item.isChecked} />
 								<span className="value">{item.value}</span>

@@ -4,12 +4,14 @@
 	justify-content: space-between;
 	padding: 3px 0;
 	align-items: center;
+	border-radius: 9px;
 }
 .wrapper {
 	margin: 0 auto;
 	width: 500px;
 	background-color: white;
-	border-radius: 7px;
+	border-radius: 9px;
+	box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.40);
 }
 .name {
 	width: 150px;
@@ -22,7 +24,7 @@
 	width: 500px;
 	background-color: white;
 	padding: 5px 0;
-	box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.90);
+	
 }
 .btnDel {
 	border: none;

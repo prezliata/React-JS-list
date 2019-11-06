@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const loadPhones = () => {
 	return (dispatch) => {
-		axios.get('http://demo5642441.mockable.io/tewgsesxerf').then((res) => {
+		axios.get('https://5dc2cce41666f6001477f524.mockapi.io/reactapi/phone').then((res) => {
 			dispatch(getPhones(res.data));
 		});
 	};
