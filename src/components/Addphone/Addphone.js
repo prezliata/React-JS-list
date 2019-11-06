@@ -1,73 +1,18 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import './Addphone.css';
 
 class Addphone extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			name: '',
-			price: 0,
-			phone: null
-		};
-	}
-
-	onChangeName = (e) => {
-		let name = e.target.value === '' ? 0 : e.target.value;
-		this.setState({
-			name: name
-		});
-	};
-
-	onChangePrice = (e) => {
-		let price = e.target.value;
-		this.setState({
-			price: price
-		});
-	};
-
-	addItem = () => {
-		let addDate = new Date().toLocaleString();
-		let newItem = {
-			isChecked: false,
-			isEditMode: false,
-			id: Date.now(),
-			name: this.state.name,
-			price: this.state.price,
-			date: addDate
-		};
-		this.setState({
-			phone: newItem
-		});
-	};
-
-	componentDidMount() {
-		this.handleSubmit();
-	}
-
-	handleSubmit = () => {
-		const phone = this.state.phone;
-		axios
-			.post(`https://5dc2cce41666f6001477f524.mockapi.io/reactapi/phone/`, phone)
-			.then((res) => {
-				console.log(res);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-	};
-
 	render() {
-		console.log(this.state.phone);
+		const { onChangeName, onChangePrice, addItem, handleSubmit } = this.props;
 		return (
 			<div className="wrapper">
 				<div className="inputWrapper">
-					<input onChange={(e) => this.onChangeName(e)} className="input" placeholder="Name" />
-					<input onChange={(e) => this.onChangePrice(e)} className="input" placeholder="Price" />
-					<button onClick={() => this.addItem()} className="btnAdd">
+					<input onChange={(e) => onChangeName(e)} className="input" placeholder="Name" />
+					<input onChange={(e) => onChangePrice(e)} className="input" placeholder="Price" />
+					<button onClick={() => addItem()} className="btnAdd">
 						Add phone
 					</button>
-					<button onClick={() => this.handleSubmit()} className="btnAdd">
+					<button onClick={() => handleSubmit()} className="btnAdd">
 						Submit
 					</button>
 				</div>

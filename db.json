@@ -1,0 +1,54 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "name": "LG",
+      "isEditMode": false,
+      "value": 0,
+      "date": 12.22,
+      "isChecked": false
+    },
+    {
+      "id": 21212,
+      "name": "SAMSUNG",
+      "isEditMode": false,
+      "value": 0,
+      "date": 12.22,
+      "isChecked": false
+    },
+    {
+      "id": 3,
+      "name": "Apple",
+      "isEditMode": false,
+      "value": 0,
+      "date": 12.22,
+      "isChecked": false
+    },
+    {
+      "id": 4,
+      "name": "Nokia",
+      "isEditMode": false,
+      "value": 4,
+      "date": 12.22,
+      "isChecked": true
+    },
+    {
+      "isChecked": false,
+      "isEditMode": false,
+      "id": 1573067933762,
+      "name": "123",
+      "price": "123",
+      "date": "06.11.2019, 21:18:53"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

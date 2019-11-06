@@ -5,14 +5,19 @@ let initialState = {
 
 const mainReducer = (state = initialState, action) => {
 	console.log(action);
-	if (action.type === 'GET_PHONES') {
-		return {
-			...state,
-			phonesArr: action.payload
-		};
+	switch (action.type) {
+		case 'GET_PHONES':
+			return {
+				...state,
+				phonesArr: action.payload
+			};
+		case 'ON_CHANGE_NAME':
+			return {
+				name: action.payload
+			};
+		default:
+			return state;
 	}
-	return state;
 };
 
 export default mainReducer;
-
