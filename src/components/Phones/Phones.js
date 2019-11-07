@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { loadPhones, postPhone } from './actions';
+import { loadPhones, postPhone, increment } from './actions';
 import Addphone from '../Addphone/Addphone.js';
 import './Phones.css';
 
@@ -10,8 +10,7 @@ class Phones extends Component {
 		super(props);
 		this.state = {
 			name: '',
-			price: 0,
-			phone: null
+			value: '',
 		};
 	}
 
@@ -28,24 +27,33 @@ class Phones extends Component {
 	};
 
 	onChangePrice = (e) => {
-		let price = e.target.value;
+		let value = e.target.value;
 		this.setState({
-			price: price
+			value: value
 		});
 	};
 
 	addItem = () => {
 		let addDate = new Date().toLocaleString();
-		let newItem = {
-			isChecked: false,
-			isEditMode: false,
-			id: Date.now(),
-			name: this.state.name,
-			price: this.state.price,
-			date: addDate
-		};
-		this.props.postPhone(newItem);
+		if(this.state.name !== '' && this.state.price !==''){
+			let newItem = {
+				isChecked: false,
+				isEditMode: false,
+				id: Date.now(),
+				name: this.state.name,
+				value: this.state.value,
+				date: addDate
+			};
+			this.props.postPhone(newItem);
+			this.reset();
+		}
 	};
+	reset() {
+		this.setState({
+			name: '',
+			value: ''
+		});
+	}
 
 	handleSubmit = () => {
 		const phone = this.state.phone;
@@ -59,6 +67,7 @@ class Phones extends Component {
 			});
 	};
 
+
 	render() {
 		console.log(this.props.phonesArr);
 		console.log(this.state);
@@ -71,6 +80,8 @@ class Phones extends Component {
 						onChangePrice={this.onChangePrice}
 						addItem={this.addItem}
 						handleSubmit={this.handleSubmit}
+						resetValue = {this.state.value}
+						resetName = {this.state.name}
 					/>
 				</div>
 				<div className="wrapper">
@@ -82,7 +93,7 @@ class Phones extends Component {
 									<span className="value">{item.value}</span>
 									<span className="name">Name: {item.name}</span>
 									{/* <input className="button" /> */}
-									<button className="btnInc">Increment</button>
+									<button className="btnInc" onClick={() =>this.handleIncrement()}>Increment</button>
 									<button className="btnDec">Decrement</button>
 									<button className=" btnDel">Delete</button>
 								</div>
