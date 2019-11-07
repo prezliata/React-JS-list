@@ -4,7 +4,7 @@
       "id": 1,
       "name": "LG",
       "isEditMode": false,
-      "value": 0,
+      "value": 4,
       "date": 12.22,
       "isChecked": false
     },
@@ -31,58 +31,6 @@
       "value": 4,
       "date": 12.22,
       "isChecked": true
-    },
-    {
-      "isChecked": false,
-      "isEditMode": false,
-      "id": 1573133478196,
-      "name": "11",
-      "value": "11",
-      "date": "11/7/2019, 3:31:18 PM"
-    },
-    {
-      "isChecked": false,
-      "isEditMode": false,
-      "id": 1573133654305,
-      "name": "11",
-      "value": "12",
-      "date": "11/7/2019, 3:34:14 PM"
-    },
-    {
-      "isChecked": false,
-      "isEditMode": false,
-      "id": 1573133662401,
-      "name": "12",
-      "value": "12",
-      "date": "11/7/2019, 3:34:22 PM"
-    },
-    {
-      "isChecked": false,
-      "isEditMode": false,
-      "id": 1573133702297,
-      "name": "11",
-      "value": "111",
-      "date": "11/7/2019, 3:35:02 PM"
-    },
-    {
-      "isChecked": false,
-      "isEditMode": false,
-      "id": 1573140289478,
-      "name": "11",
-      "value": "11",
-      "date": "11/7/2019, 5:24:49 PM"
-    },
-    {
-      "value": null,
-      "id": 1573140289479
-    },
-    {
-      "value": null,
-      "id": 1573140289480
-    },
-    {
-      "value": null,
-      "id": 1573140289481
     }
   ],
   "comments": [

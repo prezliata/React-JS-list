@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { loadPhones, postPhone, increment } from './actions';
+import { loadPhones, postPhone, putPhone } from './actions';
 import Addphone from '../Addphone/Addphone.js';
 import './Phones.css';
 
@@ -10,7 +10,7 @@ class Phones extends Component {
 		super(props);
 		this.state = {
 			name: '',
-			value: '',
+			value: ''
 		};
 	}
 
@@ -32,16 +32,20 @@ class Phones extends Component {
 			value: value
 		});
 	};
-	handleIncrement = (counter) => {
-		const counters = [ ...this.props.phonesArr ];
-		const index = counters.indexOf(counter);
-		counters[index] = { ...counter };
-		counters[index].value++;
-		this.props.postPhone(counters[index])
+
+	handleIncrement = (e) => {
+		let id = e.target.getAttribute('data-id');
+		console.log(id);
+		const phones = this.props.phonesArr;
+		const phone = phones.filter((el) => el.id == id)[0];
+		phone.value++;
+		console.log(phone);
+		this.props.putPhone(phone);
 	};
+
 	addItem = () => {
 		let addDate = new Date().toLocaleString();
-		if(this.state.name !== '' && this.state.price !==''){
+		if (this.state.name !== '' && this.state.price !== '') {
 			let newItem = {
 				isChecked: false,
 				isEditMode: false,
@@ -73,7 +77,6 @@ class Phones extends Component {
 			});
 	};
 
-
 	render() {
 		console.log(this.props.phonesArr);
 		console.log(this.state);
@@ -86,8 +89,8 @@ class Phones extends Component {
 						onChangePrice={this.onChangePrice}
 						addItem={this.addItem}
 						handleSubmit={this.handleSubmit}
-						resetValue = {this.state.value}
-						resetName = {this.state.name}
+						resetValue={this.state.value}
+						resetName={this.state.name}
 					/>
 				</div>
 				<div className="wrapper">
@@ -99,7 +102,13 @@ class Phones extends Component {
 									<span className="value">{item.value}</span>
 									<span className="name">Name: {item.name}</span>
 									{/* <input className="button" /> */}
-									<button className="btnInc" onClick={() =>this.handleIncrement()}>Increment</button>
+									<button
+										data-id={item.id}
+										className="btnInc"
+										onClick={(e) => this.handleIncrement(e)}
+									>
+										Increment
+									</button>
 									<button className="btnDec">Decrement</button>
 									<button className=" btnDel">Delete</button>
 								</div>
@@ -115,7 +124,8 @@ class Phones extends Component {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		loadPhones: () => dispatch(loadPhones()),
-		postPhone: (phone) => dispatch(postPhone(phone))
+		postPhone: (phone) => dispatch(postPhone(phone)),
+		putPhone: (phone) => dispatch(putPhone(phone))
 	};
 };
 

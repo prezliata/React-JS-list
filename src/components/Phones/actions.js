@@ -23,5 +23,10 @@ export const postPhone = (phone) => {
 	};
 };
 
-
-
+export const putPhone = (phone) => {
+	return (dispatch) => {
+		axios.put(`http://localhost:3000/posts/${phone.id}`, phone).then(() => {
+			dispatch(loadPhones());
+		});
+	};
+};
