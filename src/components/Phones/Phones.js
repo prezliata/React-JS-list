@@ -32,7 +32,13 @@ class Phones extends Component {
 			value: value
 		});
 	};
-
+	handleIncrement = (counter) => {
+		const counters = [ ...this.props.phonesArr ];
+		const index = counters.indexOf(counter);
+		counters[index] = { ...counter };
+		counters[index].value++;
+		this.props.postPhone(counters[index])
+	};
 	addItem = () => {
 		let addDate = new Date().toLocaleString();
 		if(this.state.name !== '' && this.state.price !==''){
