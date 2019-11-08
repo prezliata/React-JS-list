@@ -15,6 +15,11 @@ const mainReducer = (state = initialState, action) => {
 			return {
 				name: action.payload
 			};
+		case 'GET_SORT_PHONES':
+			return {
+				...state,
+				phonesArr: action.payload
+			};
 		default:
 			return state;
 	}

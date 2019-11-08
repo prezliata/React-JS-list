@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { loadPhones, postPhone, putPhone } from './actions';
+import { loadPhones, postPhone, putPhone, getSortPhone } from './actions';
 import Addphone from '../Addphone/Addphone.js';
+import Sortphone from '../Sortphone/Sortphone.js'
 import './Phones.css';
 
 class Phones extends Component {
@@ -16,7 +17,6 @@ class Phones extends Component {
 
 	componentDidMount() {
 		this.props.loadPhones();
-		// this.handleSubmit();
 	}
 
 	onChangeName = (e) => {
@@ -40,6 +40,13 @@ class Phones extends Component {
 		const phone = phones.filter((el) => el.id == id)[0];
 		phone.value++;
 		console.log(phone);
+		this.props.putPhone(phone);
+	};
+	handleDecrement = (e) => {
+		let id = e.target.getAttribute('data-id');
+		const phones = this.props.phonesArr;
+		const phone = phones.filter((el) => el.id == id)[0];
+		phone.value--;
 		this.props.putPhone(phone);
 	};
 
@@ -77,6 +84,22 @@ class Phones extends Component {
 			});
 	};
 
+
+	sortMaxMin = (arr) => {
+		const maxMin = arr.sort((a, b) => a.value - b.value);
+		this.props.getSortPhone(maxMin)
+	};
+
+	sortMinMax = (arr) => {
+		const minMax = arr.sort((a, b) => b.value - a.value);
+		this.props.getSortPhone(minMax)
+	};
+	sortPhoneFunc = (e) =>{
+		const {phonesArr} = this.props
+		return e.target.value === '1' ? this.sortMinMax(phonesArr): this.sortMinMax(phonesArr);	
+		// this.props.putPhone(this.props.getSortPhone(sortArr));
+	}
+
 	render() {
 		console.log(this.props.phonesArr);
 		console.log(this.state);
@@ -91,6 +114,11 @@ class Phones extends Component {
 						handleSubmit={this.handleSubmit}
 						resetValue={this.state.value}
 						resetName={this.state.name}
+					/>
+				</div>
+				<div>
+					<Sortphone
+						sortPhoneFunc = {this.sortPhoneFunc}
 					/>
 				</div>
 				<div className="wrapper">
@@ -109,7 +137,7 @@ class Phones extends Component {
 									>
 										Increment
 									</button>
-									<button className="btnDec">Decrement</button>
+									<button data-id={item.id} onClick={(e) => this.handleDecrement(e)} className="btnDec">Decrement</button>
 									<button className=" btnDel">Delete</button>
 								</div>
 							</div>
@@ -125,7 +153,8 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		loadPhones: () => dispatch(loadPhones()),
 		postPhone: (phone) => dispatch(postPhone(phone)),
-		putPhone: (phone) => dispatch(putPhone(phone))
+		putPhone: (phone) => dispatch(putPhone(phone)),
+		getSortPhone:(phone) => dispatch(getSortPhone(phone))
 	};
 };
 
