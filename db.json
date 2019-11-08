@@ -4,7 +4,7 @@
       "id": 1,
       "name": "LG",
       "isEditMode": false,
-      "value": 17,
+      "value": 24,
       "date": 12.22,
       "isChecked": false
     },
@@ -20,7 +20,7 @@
       "id": 3,
       "name": "Apple",
       "isEditMode": false,
-      "value": 0,
+      "value": 4,
       "date": 12.22,
       "isChecked": false
     },

@@ -31,13 +31,21 @@ export const putPhone = (phone) => {
 	};
 };
 
-export const getSortPhone = (phone) => {
-	return (dispatch)=>{
-		axios.put(`http://localhost:3000/posts/`, phone).then(() => {
-			dispatch(loadPhones());
-		});
-	}
-}
+export const getSortPhone = (phones) => {
+	console.log(phones);
+	return {
+		type: 'GET_SORT_PHONES',
+		payload: phones
+	};
+};
+
+// export const getSortPhone = (phone) => {
+// 	return (dispatch)=>{
+// 		axios.put(`http://localhost:3000/posts/${phone}`, phone).then(() => {
+// 			dispatch(loadPhones());
+// 		});
+// 	}
+// }
 	// return {
 	// 	type: 'GET_SORT_PHONES',
 	// 	payload: phonesArr

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { loadPhones, postPhone, putPhone, getSortPhone } from './actions';
+import { loadPhones, postPhone, putPhone, getSortPhone} from './actions';
 import Addphone from '../Addphone/Addphone.js';
 import Sortphone from '../Sortphone/Sortphone.js'
 import './Phones.css';
@@ -86,18 +86,17 @@ class Phones extends Component {
 
 
 	sortMaxMin = (arr) => {
-		const maxMin = arr.sort((a, b) => a.value - b.value);
-		this.props.getSortPhone(maxMin)
+		const phones = arr.sort((a, b) => a.value - b.value);
+		this.props.getSortPhone(phones)
 	};
 
 	sortMinMax = (arr) => {
-		const minMax = arr.sort((a, b) => b.value - a.value);
-		this.props.getSortPhone(minMax)
+		const phones = arr.sort((a, b) => b.value - a.value);
+		this.props.getSortPhone(phones)
 	};
 	sortPhoneFunc = (e) =>{
 		const {phonesArr} = this.props
-		return e.target.value === '1' ? this.sortMinMax(phonesArr): this.sortMinMax(phonesArr);	
-		// this.props.putPhone(this.props.getSortPhone(sortArr));
+		return e.target.value === '1' ? this.sortMinMax(phonesArr): this.sortMaxMin(phonesArr);	
 	}
 
 	render() {
@@ -154,7 +153,10 @@ const mapDispatchToProps = (dispatch) => {
 		loadPhones: () => dispatch(loadPhones()),
 		postPhone: (phone) => dispatch(postPhone(phone)),
 		putPhone: (phone) => dispatch(putPhone(phone)),
-		getSortPhone:(phone) => dispatch(getSortPhone(phone))
+		getSortPhone:(phones) => {
+			dispatch(getSortPhone(phones))
+			console.log(phones)
+		},
 	};
 };
 
