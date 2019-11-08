@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { loadPhones, postPhone, putPhone, getSortPhone} from './actions';
+import { loadPhones, postPhone, putPhone, getSortPhone } from './actions';
 import Addphone from '../Addphone/Addphone.js';
-import Sortphone from '../Sortphone/Sortphone.js'
+import Sortphone from '../Sortphone/Sortphone.js';
 import './Phones.css';
 
 class Phones extends Component {
@@ -84,24 +84,22 @@ class Phones extends Component {
 			});
 	};
 
-
 	sortMaxMin = (arr) => {
 		const phones = arr.sort((a, b) => a.value - b.value);
-		this.props.getSortPhone(phones)
+		this.props.getSortPhone(phones);
 	};
 
 	sortMinMax = (arr) => {
 		const phones = arr.sort((a, b) => b.value - a.value);
-		this.props.getSortPhone(phones)
+		this.props.getSortPhone(phones);
 	};
-	sortPhoneFunc = (e) =>{
-		const {phonesArr} = this.props;
-		return e.target.value === '1' ? this.sortMinMax(phonesArr): this.sortMaxMin(phonesArr);	
-	}
+	sortPhoneFunc = (e) => {
+		const { phonesArr } = this.props;
+		return e.target.value === '1' ? this.sortMinMax(phonesArr) : this.sortMaxMin(phonesArr);
+	};
 	handleUpdate = () => {
 		this.forceUpdate();
 	};
-
 
 	render() {
 		console.log(this.props.phonesArr);
@@ -121,9 +119,7 @@ class Phones extends Component {
 					/>
 				</div>
 				<div>
-					<Sortphone
-						sortPhoneFunc = {this.sortPhoneFunc}
-					/>
+					<Sortphone sortPhoneFunc={this.sortPhoneFunc} />
 				</div>
 				<div className="wrapper">
 					{this.props.phonesArr.map((item, idx) => {
@@ -141,7 +137,13 @@ class Phones extends Component {
 									>
 										Increment
 									</button>
-									<button data-id={item.id} onClick={(e) => this.handleDecrement(e)} className="btnDec">Decrement</button>
+									<button
+										data-id={item.id}
+										onClick={(e) => this.handleDecrement(e)}
+										className="btnDec"
+									>
+										Decrement
+									</button>
 									<button className=" btnDel">Delete</button>
 								</div>
 							</div>
@@ -158,10 +160,7 @@ const mapDispatchToProps = (dispatch) => {
 		loadPhones: () => dispatch(loadPhones()),
 		postPhone: (phone) => dispatch(postPhone(phone)),
 		putPhone: (phone) => dispatch(putPhone(phone)),
-		getSortPhone:(phones) => 
-			dispatch(getSortPhone(phones))
-			
-
+		getSortPhone: (phones) => dispatch(getSortPhone(phones))
 	};
 };
 

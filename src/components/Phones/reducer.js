@@ -1,6 +1,6 @@
 let initialState = {
 	phonesArr: [],
-	name: 'ss',
+	name: 'ss'
 };
 
 const mainReducer = (state = initialState, action) => {
@@ -16,9 +16,10 @@ const mainReducer = (state = initialState, action) => {
 				name: action.payload
 			};
 		case 'GET_SORT_PHONES':
+			let phones = [ ...action.payload ];
 			return {
 				...state,
-				phonesArr: action.payload
+				phonesArr: phones
 			};
 		default:
 			return state;
