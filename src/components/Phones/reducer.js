@@ -1,6 +1,6 @@
 let initialState = {
 	phonesArr: [],
-	name: 'ss'
+	name: 'ss',
 };
 
 const mainReducer = (state = initialState, action) => {

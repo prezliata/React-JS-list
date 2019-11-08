@@ -95,15 +95,20 @@ class Phones extends Component {
 		this.props.getSortPhone(phones)
 	};
 	sortPhoneFunc = (e) =>{
-		const {phonesArr} = this.props
+		const {phonesArr} = this.props;
 		return e.target.value === '1' ? this.sortMinMax(phonesArr): this.sortMaxMin(phonesArr);	
 	}
+	handleUpdate = () => {
+		this.forceUpdate();
+	};
+
 
 	render() {
 		console.log(this.props.phonesArr);
 		console.log(this.state);
 		return (
 			<div>
+				<button onClick={this.handleUpdate}>Update</button>
 				<h1>Phones</h1>
 				<div>
 					<Addphone
@@ -153,10 +158,10 @@ const mapDispatchToProps = (dispatch) => {
 		loadPhones: () => dispatch(loadPhones()),
 		postPhone: (phone) => dispatch(postPhone(phone)),
 		putPhone: (phone) => dispatch(putPhone(phone)),
-		getSortPhone:(phones) => {
+		getSortPhone:(phones) => 
 			dispatch(getSortPhone(phones))
-			console.log(phones)
-		},
+			
+
 	};
 };
 
