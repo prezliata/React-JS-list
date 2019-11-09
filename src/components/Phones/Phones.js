@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { loadPhones, postPhone, putPhone, getSortPhone } from './actions';
+import { loadPhones, postPhone, putPhone, getSortPhone, deletePhone } from './actions';
 import Addphone from '../Addphone/Addphone.js';
 import Sortphone from '../Sortphone/Sortphone.js';
 import './Phones.css';
@@ -101,6 +101,18 @@ class Phones extends Component {
 		this.forceUpdate();
 	};
 
+	handleCheckboxChange = (e) => {
+		let id = e.target.getAttribute('data-id');
+		const phones = this.props.phonesArr;
+		const phone = phones.filter((el) => el.id == id)[0];
+		phone.isChecked = !phone.isChecked;
+		this.props.putPhone(phone);
+	};
+	handleDelete = (e) => {
+		let id = e.target.getAttribute('data-id');
+		this.props.deletePhone(id);
+	};
+
 	render() {
 		console.log(this.props.phonesArr);
 		console.log(this.state);
@@ -126,7 +138,12 @@ class Phones extends Component {
 						return (
 							<div key={idx}>
 								<div className="container phones">
-									<input type="checkbox" defaultChecked={item.isChecked} />
+									<input
+										type="checkbox"
+										defaultChecked={item.isChecked}
+										onChange={(e) => this.handleCheckboxChange(e)}
+										data-id={item.id}
+									/>
 									<span className="value">{item.value}</span>
 									<span className="name">Name: {item.name}</span>
 									{/* <input className="button" /> */}
@@ -144,7 +161,9 @@ class Phones extends Component {
 									>
 										Decrement
 									</button>
-									<button className=" btnDel">Delete</button>
+									<button data-id={item.id} onClick={(e) => this.handleDelete(e)} className=" btnDel">
+										Delete
+									</button>
 								</div>
 							</div>
 						);
@@ -160,6 +179,7 @@ const mapDispatchToProps = (dispatch) => {
 		loadPhones: () => dispatch(loadPhones()),
 		postPhone: (phone) => dispatch(postPhone(phone)),
 		putPhone: (phone) => dispatch(putPhone(phone)),
+		deletePhone: (phone) => dispatch(deletePhone(phone)),
 		getSortPhone: (phones) => dispatch(getSortPhone(phones))
 	};
 };

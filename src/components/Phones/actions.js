@@ -31,6 +31,14 @@ export const putPhone = (phone) => {
 	};
 };
 
+export const deletePhone = (phone) => {
+	return (dispatch) => {
+		axios.delete('http://localhost:3000/posts/' + phone).then(() => {
+			dispatch(loadPhones());
+		});
+	};
+};
+
 export const getSortPhone = (phones) => {
 	console.log(phones);
 	return {
@@ -46,8 +54,7 @@ export const getSortPhone = (phones) => {
 // 		});
 // 	}
 // }
-	// return {
-	// 	type: 'GET_SORT_PHONES',
-	// 	payload: phonesArr
-	// };
-
+// return {
+// 	type: 'GET_SORT_PHONES',
+// 	payload: phonesArr
+// };

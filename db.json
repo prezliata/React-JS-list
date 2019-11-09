@@ -1,45 +1,31 @@
 {
   "posts": [
     {
-      "id": 1,
-      "name": "LG",
+      "isChecked": false,
       "isEditMode": false,
-      "value": 25,
-      "date": 12.22,
-      "isChecked": false
+      "id": 1573335891733,
+      "name": "111",
+      "value": "111",
+      "date": "09.11.2019, 23:44:51"
     },
     {
-      "id": 21212,
-      "name": "SAMSUNG",
+      "isChecked": false,
       "isEditMode": false,
-      "value": 0,
-      "date": 12.22,
-      "isChecked": false
+      "id": 1573335899512,
+      "name": "1111",
+      "value": "1111",
+      "date": "09.11.2019, 23:44:59"
     },
     {
-      "id": 3,
-      "name": "Apple",
+      "isChecked": false,
       "isEditMode": false,
-      "value": 5,
-      "date": 12.22,
-      "isChecked": false
-    },
-    {
-      "id": 4,
-      "name": "Nokia",
-      "isEditMode": false,
-      "value": 4,
-      "date": 12.22,
-      "isChecked": true
+      "id": 1573335901681,
+      "name": "111",
+      "value": "111",
+      "date": "09.11.2019, 23:45:01"
     }
   ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
+  "comments": [],
   "profile": {
     "name": "typicode"
   }
