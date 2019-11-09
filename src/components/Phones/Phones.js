@@ -101,6 +101,14 @@ class Phones extends Component {
 		this.forceUpdate();
 	};
 
+	handleCheckboxChange = (e) => {
+		let id = e.target.getAttribute('data-id');
+		const phones = this.props.phonesArr;
+		const phone = phones.filter((el) => el.id == id)[0];
+		phone.isChecked = !phone.isChecked;
+		this.props.putPhone(phone);
+	};
+
 	render() {
 		console.log(this.props.phonesArr);
 		console.log(this.state);
@@ -126,7 +134,12 @@ class Phones extends Component {
 						return (
 							<div key={idx}>
 								<div className="container phones">
-									<input type="checkbox" defaultChecked={item.isChecked} />
+									<input
+										type="checkbox"
+										defaultChecked={item.isChecked}
+										onChange={(e) => this.handleCheckboxChange(e)}
+										data-id={item.id}
+									/>
 									<span className="value">{item.value}</span>
 									<span className="name">Name: {item.name}</span>
 									{/* <input className="button" /> */}

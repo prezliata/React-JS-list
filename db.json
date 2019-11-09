@@ -4,9 +4,9 @@
       "id": 1,
       "name": "LG",
       "isEditMode": false,
-      "value": 25,
+      "value": 22,
       "date": 12.22,
-      "isChecked": false
+      "isChecked": true
     },
     {
       "id": 21212,
@@ -31,6 +31,14 @@
       "value": 4,
       "date": 12.22,
       "isChecked": true
+    },
+    {
+      "isChecked": false,
+      "isEditMode": false,
+      "id": 1573282328201,
+      "name": "11",
+      "value": "1111",
+      "date": "09.11.2019, 08:52:08"
     }
   ],
   "comments": [
