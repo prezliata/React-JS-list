@@ -1,0 +1,97 @@
+.container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding: 3px 0;
+	align-items: center;
+	border-radius: 9px;
+}
+.wrapper {
+	margin: 0 auto;
+	width: 500px;
+	background-color: white;
+	border-radius: 9px;
+	box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.40);
+}
+.name {
+	width: 150px;
+}
+.value {
+	width: 30px;
+}
+.phones {
+	margin: 0 auto;
+	width: 500px;
+	background-color: white;
+	padding: 5px 0;
+	
+}
+.btnDel {
+	border: none;
+	color: #fff;
+	background-color: #d13d3f;
+	padding: 4px 8px;
+	border-radius: 4px;
+	transition: .3s ease-in-out;
+}
+.btnDel:hover {
+	background-color: #e05859;
+}
+.btnDel:active:active,
+.btnDel:focus {
+	outline: none;
+	border: none;
+}
+.btnDec {
+	border: none;
+	color: #fff;
+	background-color: #56cc8d;
+	padding: 4px 8px;
+	border-radius: 4px;
+	transition: .3s ease-in-out;
+}
+.btnDec:hover {
+	background-color: #5cdb97;
+}
+.btnDec:active:active,
+.btnDec:focus {
+	outline: none;
+	border: none;
+}
+.btnInc {
+	border: none;
+	color: #fff;
+	background-color: #5c91db;
+	padding: 4px 8px;
+	border-radius: 4px;
+	transition: .3s ease-in-out;
+}
+.btnInc:hover {
+	background-color: #6ba9ff;
+}
+.btnInc:active:active,
+.btnInc:focus {
+	outline: none;
+	border: none;
+}
+/* .button {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 14px;
+	color: #323232;
+	padding-left: 18px;
+	box-sizing: border-box;
+	border: 1px solid gray;
+	margin: 0 0;
+	border-radius: 2px;
+}
+.button:focus {
+	outline: none;
+}
+.button::placeholder {
+	color: gray;
+} */
+input:focus {
+	outline: none;
+}

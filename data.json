@@ -1,0 +1,6 @@
+[
+    { "id": 1, "name": "LG", "isEditMode": false, "value": 0, "date": 12.22, "isChecked": false },
+    { "id": 21212, "name": "SAMSUNG", "isEditMode": false, "value": 0, "date": 12.22, "isChecked": false },
+    { "id": 3, "name": "Apple", "isEditMode": false, "value": 0, "date": 12.22, "isChecked": false },
+    { "id": 4, "name": "Nokia", "isEditMode": false, "value": 4, "date": 12.22, "isChecked": true } 
+]

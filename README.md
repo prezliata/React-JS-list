@@ -1,3 +1,15 @@
+Server
+
+### `npm install -g json-server`
+
+Start JSON Server
+
+### `json-server --watch db.json`
+
+Redux Thunk
+
+### `npm install redux-thunk`
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
