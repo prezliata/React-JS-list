@@ -10,6 +10,7 @@ class Phones extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			editName: '',
 			name: '',
 			value: ''
 		};
@@ -113,6 +114,32 @@ class Phones extends Component {
 		this.props.deletePhone(id);
 	};
 
+	isEditModeTrue = (e) => {
+		let id = e.target.getAttribute('data-id');
+		const phones = this.props.phonesArr;
+		let editName = this.state.editName;
+		const phone = phones.filter((el) => el.id == id)[0];
+		phone.isEditMode = false;
+		phone.name = editName;
+		this.props.putPhone(phone);
+	};
+	isEditModeFalse = (e) => {
+		let id = e.target.getAttribute('data-id');
+		const phones = this.props.phonesArr;
+		let editName = this.state.editName;
+		const phone = phones.filter((el) => el.id == id)[0];
+		phone.isEditMode = true;
+		phone.name = editName;
+		this.props.putPhone(phone);
+	};
+
+	handleEdit = (e) => {
+		let name = e.target.value;
+		this.setState({
+			editName: name
+		});
+	};
+
 	render() {
 		console.log(this.props.phonesArr);
 		console.log(this.state);
@@ -164,6 +191,27 @@ class Phones extends Component {
 									<button data-id={item.id} onClick={(e) => this.handleDelete(e)} className=" btnDel">
 										Delete
 									</button>
+
+									{item.isEditMode === false ? (
+										<button
+											onClick={(e) => this.isEditModeFalse(e)}
+											data-id={item.id}
+											className="btnDec"
+										>
+											Edit
+										</button>
+									) : (
+										<div>
+											<button
+												onClick={(e) => this.isEditModeTrue(e)}
+												data-id={item.id}
+												className="btnDec"
+											>
+												Save
+											</button>
+											<input placeholder="edit" onChange={(e) => this.handleEdit(e)} />
+										</div>
+									)}
 								</div>
 							</div>
 						);
