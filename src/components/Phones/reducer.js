@@ -1,4 +1,5 @@
 let initialState = {
+	initialPhonesArr: [],
 	phonesArr: [],
 	name: 'ss'
 };
@@ -9,7 +10,8 @@ const mainReducer = (state = initialState, action) => {
 		case 'GET_PHONES':
 			return {
 				...state,
-				phonesArr: action.payload
+				phonesArr: action.payload,
+				initialPhonesArr: action.payload
 			};
 		case 'ON_CHANGE_NAME':
 			return {
@@ -22,9 +24,10 @@ const mainReducer = (state = initialState, action) => {
 				phonesArr: phones
 			};
 		case 'GET_FiND_PHONES':
+			let phoneArray = [ ...action.payload ];
 			return {
 				...state,
-				phonesArr: action.payload
+				phonesArr: phoneArray
 			};
 		default:
 			return state;

@@ -13,7 +13,7 @@ class Phones extends Component {
 			editName: '',
 			name: '',
 			value: '',
-			findPhone:[]
+			findPhone: []
 		};
 	}
 
@@ -36,16 +36,13 @@ class Phones extends Component {
 	};
 
 	filterPhones = (e) => {
-		const phones = this.props.phonesArr;
-		let findPhone = this.state.findPhone;
-		findPhone = phones.filter((item) => {
-			return item.name.toLowerCase().search(e.target.value.toLowerCase()) !== -1;
-		});
-		e.target.value !== '' ? this.props.getFindPhone(findPhone) : this.props.getFindPhone(phones);
-		// this.props.getFindPhone(findPhone);
-		console.log(phones)
+		// const phones = this.props.phonesArr;
+		let filteredPhones = this.props.initialPhonesArr;
+		filteredPhones = filteredPhones.filter(
+			(item) => item.name.toLowerCase().search(e.target.value.toLowerCase()) !== -1
+		);
+		this.props.getFindPhone(filteredPhones);
 	};
-
 
 	handleIncrement = (e) => {
 		let id = e.target.getAttribute('data-id');
@@ -152,12 +149,12 @@ class Phones extends Component {
 			editName: name
 		});
 	};
-	onDeleteAll = () =>{
-		const phones = 	this.props.phonesArr
+	onDeleteAll = () => {
+		const phones = this.props.phonesArr;
 		let newPhones = phones.filter((c) => c.isChecked === true);
-		newPhones.forEach((el)=> this.props.deletePhone(el.id))
-		console.log(newPhones)
-	}
+		newPhones.forEach((el) => this.props.deletePhone(el.id));
+		console.log(newPhones);
+	};
 	render() {
 		console.log(this.props.phonesArr);
 		console.log(this.state);
@@ -176,7 +173,7 @@ class Phones extends Component {
 					/>
 				</div>
 				<div>
-					<Sortphone 
+					<Sortphone
 						sortPhoneFunc={this.sortPhoneFunc}
 						filterPhones={this.filterPhones}
 						onDeleteAll={this.onDeleteAll}
@@ -231,7 +228,11 @@ class Phones extends Component {
 											>
 												Save
 											</button>
-											<input className="inputEdit" placeholder="edit" onChange={(e) => this.handleEdit(e)} />
+											<input
+												className="inputEdit"
+												placeholder="edit"
+												onChange={(e) => this.handleEdit(e)}
+											/>
 										</div>
 									)}
 								</div>
@@ -257,7 +258,8 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
 	return {
-		phonesArr: state.phonesArr.phonesArr
+		phonesArr: state.phonesArr.phonesArr,
+		initialPhonesArr: state.phonesArr.initialPhonesArr
 	};
 };
 
