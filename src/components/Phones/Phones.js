@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { loadPhones, postPhone, putPhone, getSortPhone, deletePhone } from './actions';
+import { loadPhones, postPhone, putPhone, getSortPhone, deletePhone, getFindPhone } from './actions';
 import Addphone from '../Addphone/Addphone.js';
 import Sortphone from '../Sortphone/Sortphone.js';
 import './Phones.css';
@@ -12,7 +12,8 @@ class Phones extends Component {
 		this.state = {
 			editName: '',
 			name: '',
-			value: ''
+			value: '',
+			findPhone:[]
 		};
 	}
 
@@ -33,6 +34,18 @@ class Phones extends Component {
 			value: value
 		});
 	};
+
+	filterPhones = (e) => {
+		const phones = this.props.phonesArr;
+		let findPhone = this.state.findPhone;
+		findPhone = phones.filter((item) => {
+			return item.name.toLowerCase().search(e.target.value.toLowerCase()) !== -1;
+		});
+		e.target.value !== '' ? this.props.getFindPhone(findPhone) : this.props.getFindPhone(phones);
+		// this.props.getFindPhone(findPhone);
+		console.log(phones)
+	};
+
 
 	handleIncrement = (e) => {
 		let id = e.target.getAttribute('data-id');
@@ -139,7 +152,12 @@ class Phones extends Component {
 			editName: name
 		});
 	};
-
+	onDeleteAll = () =>{
+		const phones = 	this.props.phonesArr
+		let newPhones = phones.filter((c) => c.isChecked === true);
+		newPhones.forEach((el)=> this.props.deletePhone(el.id))
+		console.log(newPhones)
+	}
 	render() {
 		console.log(this.props.phonesArr);
 		console.log(this.state);
@@ -158,7 +176,11 @@ class Phones extends Component {
 					/>
 				</div>
 				<div>
-					<Sortphone sortPhoneFunc={this.sortPhoneFunc} />
+					<Sortphone 
+						sortPhoneFunc={this.sortPhoneFunc}
+						filterPhones={this.filterPhones}
+						onDeleteAll={this.onDeleteAll}
+					/>
 				</div>
 				<div className="wrapper">
 					{this.props.phonesArr.map((item, idx) => {
@@ -196,7 +218,7 @@ class Phones extends Component {
 										<button
 											onClick={(e) => this.isEditModeFalse(e)}
 											data-id={item.id}
-											className="btnDec"
+											className="btnEdit"
 										>
 											Edit
 										</button>
@@ -205,11 +227,11 @@ class Phones extends Component {
 											<button
 												onClick={(e) => this.isEditModeTrue(e)}
 												data-id={item.id}
-												className="btnDec"
+												className="btnEdit"
 											>
 												Save
 											</button>
-											<input placeholder="edit" onChange={(e) => this.handleEdit(e)} />
+											<input className="inputEdit" placeholder="edit" onChange={(e) => this.handleEdit(e)} />
 										</div>
 									)}
 								</div>
@@ -228,7 +250,8 @@ const mapDispatchToProps = (dispatch) => {
 		postPhone: (phone) => dispatch(postPhone(phone)),
 		putPhone: (phone) => dispatch(putPhone(phone)),
 		deletePhone: (phone) => dispatch(deletePhone(phone)),
-		getSortPhone: (phones) => dispatch(getSortPhone(phones))
+		getSortPhone: (phones) => dispatch(getSortPhone(phones)),
+		getFindPhone: (phones) => dispatch(getFindPhone(phones))
 	};
 };
 

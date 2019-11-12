@@ -4,7 +4,7 @@ let initialState = {
 };
 
 const mainReducer = (state = initialState, action) => {
-	console.log(action);
+	// console.log(action);
 	switch (action.type) {
 		case 'GET_PHONES':
 			return {
@@ -20,6 +20,11 @@ const mainReducer = (state = initialState, action) => {
 			return {
 				...state,
 				phonesArr: phones
+			};
+		case 'GET_FiND_PHONES':
+			return {
+				...state,
+				phonesArr: action.payload
 			};
 		default:
 			return state;

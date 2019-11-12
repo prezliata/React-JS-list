@@ -1,28 +1,20 @@
 {
   "posts": [
     {
-      "isChecked": false,
+      "isChecked": true,
       "isEditMode": false,
-      "id": 1573335891733,
+      "id": 1573569569967,
       "name": "1",
-      "value": 111,
-      "date": "09.11.2019, 23:44:51"
+      "value": "1",
+      "date": "11/12/2019, 4:39:29 PM"
     },
     {
       "isChecked": false,
       "isEditMode": false,
-      "id": 1573335901681,
-      "name": "assasa",
-      "value": "111",
-      "date": "09.11.2019, 23:45:01"
-    },
-    {
-      "isChecked": false,
-      "isEditMode": false,
-      "id": 1573337273238,
-      "name": "",
-      "value": "111",
-      "date": "10.11.2019, 00:07:53"
+      "id": 1573569572198,
+      "name": "2",
+      "value": "2",
+      "date": "11/12/2019, 4:39:32 PM"
     }
   ],
   "comments": [],

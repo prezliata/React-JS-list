@@ -8,7 +8,7 @@
 }
 .wrapper {
 	margin: 0 auto;
-	width: 500px;
+	width: 650px;
 	background-color: white;
 	border-radius: 9px;
 	box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.40);
@@ -21,7 +21,7 @@
 }
 .phones {
 	margin: 0 auto;
-	width: 500px;
+	width: 650px;
 	background-color: white;
 	padding: 5px 0;
 	
@@ -74,24 +74,28 @@
 	outline: none;
 	border: none;
 }
-/* .button {
-	padding-top: 10px;
-	padding-bottom: 10px;
-	font-family: 'Open Sans', sans-serif;
-	font-size: 14px;
-	color: #323232;
-	padding-left: 18px;
-	box-sizing: border-box;
-	border: 1px solid gray;
-	margin: 0 0;
-	border-radius: 2px;
+.btnEdit{
+	border: none;
+	color: #fff;
+	background-color: #e6b839;
+	padding: 4px 8px;
+	border-radius: 4px;
+	transition: .3s ease-in-out;
 }
-.button:focus {
+.btnEdit:hover {
+	background-color: #f7ca4d;
+}
+.btnEdit:active:active,
+.btnEdit:focus {
 	outline: none;
+	border: none;
 }
-.button::placeholder {
-	color: gray;
-} */
+
 input:focus {
 	outline: none;
+}
+.inputEdit{
+	width: 100px;
+	margin-left: 10px;
+	padding-left: 10px;
 }

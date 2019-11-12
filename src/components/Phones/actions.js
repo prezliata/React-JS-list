@@ -40,9 +40,14 @@ export const deletePhone = (phone) => {
 };
 
 export const getSortPhone = (phones) => {
-	console.log(phones);
 	return {
 		type: 'GET_SORT_PHONES',
+		payload: phones
+	};
+};
+export const getFindPhone = (phones) => {
+	return {
+		type: 'GET_FiND_PHONES',
 		payload: phones
 	};
 };
