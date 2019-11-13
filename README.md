@@ -10,6 +10,10 @@ Redux Thunk
 
 ### `npm install redux-thunk`
 
+React Router
+
+### `npm i react-router-dom --save`
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

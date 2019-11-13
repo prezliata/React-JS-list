@@ -46,11 +46,9 @@ class Phones extends Component {
 
 	handleIncrement = (e) => {
 		let id = e.target.getAttribute('data-id');
-		console.log(id);
 		const phones = this.props.phonesArr;
 		const phone = phones.filter((el) => el.id == id)[0];
 		phone.value++;
-		console.log(phone);
 		this.props.putPhone(phone);
 	};
 	handleDecrement = (e) => {
@@ -127,20 +125,20 @@ class Phones extends Component {
 	isEditModeTrue = (e) => {
 		let id = e.target.getAttribute('data-id');
 		const phones = this.props.phonesArr;
-		let editName = this.state.editName;
 		const phone = phones.filter((el) => el.id == id)[0];
 		phone.isEditMode = false;
+		this.setState({editName: phone.name})
+		let editName = this.state.editName;
 		phone.name = editName;
 		this.props.putPhone(phone);
 	};
+	
 	isEditModeFalse = (e) => {
 		let id = e.target.getAttribute('data-id');
 		const phones = this.props.phonesArr;
-		let editName = this.state.editName;
 		const phone = phones.filter((el) => el.id == id)[0];
 		phone.isEditMode = true;
-		phone.name = editName;
-		this.props.putPhone(phone);
+		this.setState({editName: phone.name})
 	};
 
 	handleEdit = (e) => {
@@ -153,11 +151,8 @@ class Phones extends Component {
 		const phones = this.props.phonesArr;
 		let newPhones = phones.filter((c) => c.isChecked === true);
 		newPhones.forEach((el) => this.props.deletePhone(el.id));
-		console.log(newPhones);
 	};
 	render() {
-		console.log(this.props.phonesArr);
-		console.log(this.state);
 		return (
 			<div>
 				<button onClick={this.handleUpdate}>Update</button>

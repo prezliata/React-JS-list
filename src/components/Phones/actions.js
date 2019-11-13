@@ -34,7 +34,7 @@ export const putPhone = (phone) => {
 
 export const deletePhone = (phone) => {
 	return (dispatch) => {
-		axios.delete('http://localhost:3000/posts/' + phone).then(() => {
+		axios.delete(`http://localhost:3000/posts/${phone}`).then(() => {
 			dispatch(loadPhones());
 		});
 	};
