@@ -3,6 +3,7 @@ import axios from 'axios';
 export const loadPhones = () => {
 	return (dispatch) => {
 		axios.get('http://localhost:3000/posts/').then((res) => {
+			console.log(res);
 			dispatch(getPhones(res.data));
 		});
 	};
@@ -33,16 +34,21 @@ export const putPhone = (phone) => {
 
 export const deletePhone = (phone) => {
 	return (dispatch) => {
-		axios.delete('http://localhost:3000/posts/' + phone).then(() => {
+		axios.delete(`http://localhost:3000/posts/${phone}`).then(() => {
 			dispatch(loadPhones());
 		});
 	};
 };
 
 export const getSortPhone = (phones) => {
-	console.log(phones);
 	return {
 		type: 'GET_SORT_PHONES',
+		payload: phones
+	};
+};
+export const getFindPhone = (phones) => {
+	return {
+		type: 'GET_FiND_PHONES',
 		payload: phones
 	};
 };

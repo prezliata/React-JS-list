@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { loadPhones, postPhone, putPhone, getSortPhone, deletePhone } from './actions';
+import { loadPhones, postPhone, putPhone, getSortPhone, deletePhone, getFindPhone } from './actions';
 import Addphone from '../Addphone/Addphone.js';
 import Sortphone from '../Sortphone/Sortphone.js';
 import './Phones.css';
@@ -10,8 +10,10 @@ class Phones extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			editName: '',
 			name: '',
-			value: ''
+			value: '',
+			findPhone: []
 		};
 	}
 
@@ -33,13 +35,20 @@ class Phones extends Component {
 		});
 	};
 
+	filterPhones = (e) => {
+		// const phones = this.props.phonesArr;
+		let filteredPhones = this.props.initialPhonesArr;
+		filteredPhones = filteredPhones.filter(
+			(item) => item.name.toLowerCase().search(e.target.value.toLowerCase()) !== -1
+		);
+		this.props.getFindPhone(filteredPhones);
+	};
+
 	handleIncrement = (e) => {
 		let id = e.target.getAttribute('data-id');
-		console.log(id);
 		const phones = this.props.phonesArr;
 		const phone = phones.filter((el) => el.id == id)[0];
 		phone.value++;
-		console.log(phone);
 		this.props.putPhone(phone);
 	};
 	handleDecrement = (e) => {
@@ -113,9 +122,37 @@ class Phones extends Component {
 		this.props.deletePhone(id);
 	};
 
+	isEditModeTrue = (e) => {
+		let id = e.target.getAttribute('data-id');
+		const phones = this.props.phonesArr;
+		const phone = phones.filter((el) => el.id == id)[0];
+		phone.isEditMode = false;
+		this.setState({editName: phone.name})
+		let editName = this.state.editName;
+		phone.name = editName;
+		this.props.putPhone(phone);
+	};
+	
+	isEditModeFalse = (e) => {
+		let id = e.target.getAttribute('data-id');
+		const phones = this.props.phonesArr;
+		const phone = phones.filter((el) => el.id == id)[0];
+		phone.isEditMode = true;
+		this.setState({editName: phone.name})
+	};
+
+	handleEdit = (e) => {
+		let name = e.target.value;
+		this.setState({
+			editName: name
+		});
+	};
+	onDeleteAll = () => {
+		const phones = this.props.phonesArr;
+		let newPhones = phones.filter((c) => c.isChecked === true);
+		newPhones.forEach((el) => this.props.deletePhone(el.id));
+	};
 	render() {
-		console.log(this.props.phonesArr);
-		console.log(this.state);
 		return (
 			<div>
 				<button onClick={this.handleUpdate}>Update</button>
@@ -131,7 +168,11 @@ class Phones extends Component {
 					/>
 				</div>
 				<div>
-					<Sortphone sortPhoneFunc={this.sortPhoneFunc} />
+					<Sortphone
+						sortPhoneFunc={this.sortPhoneFunc}
+						filterPhones={this.filterPhones}
+						onDeleteAll={this.onDeleteAll}
+					/>
 				</div>
 				<div className="wrapper">
 					{this.props.phonesArr.map((item, idx) => {
@@ -164,6 +205,31 @@ class Phones extends Component {
 									<button data-id={item.id} onClick={(e) => this.handleDelete(e)} className=" btnDel">
 										Delete
 									</button>
+
+									{item.isEditMode === false ? (
+										<button
+											onClick={(e) => this.isEditModeFalse(e)}
+											data-id={item.id}
+											className="btnEdit"
+										>
+											Edit
+										</button>
+									) : (
+										<div>
+											<button
+												onClick={(e) => this.isEditModeTrue(e)}
+												data-id={item.id}
+												className="btnEdit"
+											>
+												Save
+											</button>
+											<input
+												className="inputEdit"
+												placeholder="edit"
+												onChange={(e) => this.handleEdit(e)}
+											/>
+										</div>
+									)}
 								</div>
 							</div>
 						);
@@ -180,13 +246,15 @@ const mapDispatchToProps = (dispatch) => {
 		postPhone: (phone) => dispatch(postPhone(phone)),
 		putPhone: (phone) => dispatch(putPhone(phone)),
 		deletePhone: (phone) => dispatch(deletePhone(phone)),
-		getSortPhone: (phones) => dispatch(getSortPhone(phones))
+		getSortPhone: (phones) => dispatch(getSortPhone(phones)),
+		getFindPhone: (phones) => dispatch(getFindPhone(phones))
 	};
 };
 
 const mapStateToProps = (state) => {
 	return {
-		phonesArr: state.phonesArr.phonesArr
+		phonesArr: state.phonesArr.phonesArr,
+		initialPhonesArr: state.phonesArr.initialPhonesArr
 	};
 };
 

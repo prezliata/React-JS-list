@@ -1,5 +1,7 @@
-import React, {Component} from 'react';
+import React  from 'react';
 import {connect} from 'react-redux';
+
+import {Link} from 'react-router-dom'
 
 
 const mapStateToProps = (state) =>{
@@ -11,12 +13,20 @@ const mapStateToProps = (state) =>{
 const Navbar =(props) => {
     return ( 
         <nav className="navbar navbar-light bg-light">
-            <a className="navbar-brand" href="#">
+            <span className="navbar-brand">
                 Navbar 
                 <span className="badge badge-pill badge-secondary">{props.counter}</span>
                 {/* Sum:
                 <span className="badge badge-pill badge-secondary">{sum}</span> */}
-            </a>
+            </span>
+            <ul>
+                <li>
+                    <Link to='/home'>Home</Link>
+                </li>
+                <li>
+                    <Link to='/rooms'>Rooms</Link>
+                </li>
+            </ul>
         </nav>
     );
 }

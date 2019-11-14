@@ -1,15 +1,17 @@
 let initialState = {
+	initialPhonesArr: [],
 	phonesArr: [],
 	name: 'ss'
 };
 
 const mainReducer = (state = initialState, action) => {
-	console.log(action);
+	// console.log(action);
 	switch (action.type) {
 		case 'GET_PHONES':
 			return {
 				...state,
-				phonesArr: action.payload
+				phonesArr: action.payload,
+				initialPhonesArr: action.payload
 			};
 		case 'ON_CHANGE_NAME':
 			return {
@@ -20,6 +22,12 @@ const mainReducer = (state = initialState, action) => {
 			return {
 				...state,
 				phonesArr: phones
+			};
+		case 'GET_FiND_PHONES':
+			let phoneArray = [ ...action.payload ];
+			return {
+				...state,
+				phonesArr: phoneArray
 			};
 		default:
 			return state;
